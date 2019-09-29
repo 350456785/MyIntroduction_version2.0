@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+<meta name="viewport"
+	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+<title>博客</title>
+<link rel="stylesheet" href="../res/layui/css/layui.css">
+<link rel="stylesheet" href="../res/static/css/index.css">
+</head>
+<body>
+	<!-- 侧边内容 -->
+	<div class="sidebar-content">
+		<div class="layui-card">
+			<div class="layui-card-header">
+				<img src="./res/static/img/portrait.png" alt="" style="width: 50%;"><br />
+				<span>黄刚</span>
+			</div>
+			<div class="layui-card-body">
+				<ul>
+					<li class="txt"><span>[[${articleCount}]]</span><br /> <span>笔记</span></li>
+					<li class="item"><span>0</span><br /> <span>项目</span></li>
+				</ul>
+			</div>
+		</div>
+		<ul class="layui-nav">
+			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+			<li class="layui-nav-item  layui-this"><a href="/article">笔记<br />ARTICLE
+			</a></li>
+			<li class="layui-nav-item"><a href="works.html">作品<br />WORKS
+			</a></li>
+			<li class="layui-nav-item last"><a href="index">首页<br />INDEX
+			</a></li>
+		</ul>
+	</div>
+
+
+
+	<!-- 右侧内容区域 -->
+
+	<!-- 主要内容 -->
+	<div class="main mood">
+		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+			<ul class="layui-tab-title">
+				<li class="channel" value=1
+					th:classappend="${channel==1}?'layui-this':''">前端开发</li>
+				<li class="channel" value=2
+					th:classappend="${channel==2}?'layui-this':''">后台开发</li>
+				<li class="channel" value=3
+					th:classappend="${channel==3}?'layui-this':''">数据管理</li>
+			</ul>
+			<div class="layui-tab-content">
+				<a href="javascript:void(0)" id="btnSend"
+					class="layui-btn layui-btn-big" style="float: right;">记录</a>
+			</div>
+		</div>
+		<div style="clear: both;">
+			<br>
+		</div>
+		<!-- <div class="item">
+       <img src="../res/static/img/book.jpg" alt="">
+       <div class="item-content">
+          <h3>学好JS,走哪儿都不怕</h3>
+          <span class="Subtitle">html</span><br />
+          
+          <p>对于想学习Javascript的读者来说, 很可能已经掌握了HTML和Web页面设计的基本知识,希望为页面添加一些更好的互动性,或者,目前是在使用其他语言进行编程,想了解一下JavaScript能够提供哪些更多的功能供哪些更多的功能</p>
+          <a href="article-detail.html" onclick="javascript:window.open(this.href)"><button class="layui-btn">阅读全文</button></a>
+       </div>
+       <div class="date-box">
+          <div class="date">
+              <h4>29</h4>
+              <span>2018/06</span>
+          </div>
+       </div>
+    </div> -->
+
+		<div class="item" th:each="content:${contents}">
+			<div class="item-content">
+				<h3>
+					<em class="Subtitle">[[${content.title}]]</em>
+				</h3>
+				<br />
+				<p id="myContent.id" style="display: none;">[[${content.id}]]</p>
+				<pre th:utext="${content.content}"></pre>
+
+			</div>
+			<div class="date-box">
+				<div class="date" style="color: white;">
+					<span>[[${content.formatDate}]]</span> <span
+						class="layui-btn-group">
+						<button type="button" th:onclick="del_btn([[${content.id}]])"
+							class="layui-btn layui-btn-xs layui-btn-danger">删除</button>
+
+					</span>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div id="myContent_page"></div>
+
+
+		<!-- 搜索框 -->
+		<div class="seach">
+			<form class="layui-form seach-box" action="">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn">
+							<i class="layui-icon layui-icon-search"></i>
+						</button>
+						<input type="text" name="username" lay-verify="required"
+							placeholder="搜索相关" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+			</form>
+		</div>
+		<hr class="layui-bg-orange">
+		<div class="layui-footer footer footer-index">
+			<div class="layui-main" style="text-align: center; color: white;">
+				<p>© 2019 version2.0</p>
+				<p>滇ICP备18002082号-1</p>
+			</div>
+		</div>
+
+		<script src="../res/layui/layui.js"></script>
+		<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+		<script>
+			var channel, contentId;
+			function del_btn(content_Id) {
+				channel = $("li.channel.layui-this").val();
+				contentId = content_Id;
+				var action = layer.open({
+					type : 1,
+					offset : 'auto'
+					//,id: 'password'//防止重复弹出
+					,
+					content : $('#password'),
+					btn : '确认删除',
+					btnAlign : 'c' //按钮居中
+					,
+					shade : 0.5 //不显示遮罩
+					,
+					anim : 6,
+					resize : true,
+					yes : function(index, layero) {
+						sure();
+						// layer.closeAll();
+					}
+				});
+			}
+			function sure() {
+				var password = $("#password input").val();
+				$.ajax({
+					url : "/delContent",
+					data : {
+						'contentId' : contentId,
+						'channel' : channel,
+						'password' : password
+					},
+					dataType : 'json',
+					type : 'POST',
+					success:function(json) {
+						var message=json.msg;
+						if(!json.data){
+							layer.msg(message, {
+								icon : 1,
+								offset : '200px',
+								time : 2000
+							}, function() {
+								layer.closeAll();
+							});
+						}else{
+							layer.msg(message, {
+								icon : 1,
+								offset : '200px',
+								time : 2000
+							}, function() {
+								location.href = '/article?channel=' + channel;
+							});
+							
+						}
+						
+					},
+				});
+			}
+			layui.config({
+				base : '../res/static/js/'
+			}).use('layBlog_article');
+
+			layui.use([ "layer", "element", "table" ], function() {
+				$ = layui.$;
+				table = layui.table;
+				layer = layui.layer;
+
+				$(".channel").click(function() {
+					var value = this.value;
+					location.href = '/article?channel=' + value;
+
+				});
+
+				$("#btnSend").click(function() {
+					layer.open({
+						type : 1,
+						title : '专业技术记录',
+						content : $('#content_form')
+					});
+				});
+
+			});
+		</script>
+</body>
+<div style="padding: 20px 100px; display: none;" id="password">
+	请输入密码: <input type="password">
+</div>
+
+<form class="layui-form" action="" id="content_form"
+	style="display: none;">
+	<div class="layui-form-item" style="margin: 5%;">
+		<label class="layui-form-label">标题：</label>
+		<div class="layui-input-block">
+			<input type="text" name="title" required lay-verify="required"
+				placeholder="请输入标题" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">所属技能：</label>
+		<div class="layui-input-block">
+			<input type="radio" name="channel" value=1 title="前端开发" checked>
+			<input type="radio" name="channel" value=2 title="后台开发"> <input
+				type="radio" name="channel" value=3 title="数据管理">
+		</div>
+	</div>
+	<div class="layui-form-item layui-form-text" style="margin: 5%;">
+		<label class="layui-form-label">记录内容：</label>
+		<div class="layui-input-block">
+			<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		</div>
+
+	</div>
+</form>
+
+<script>
+	layui.use([ 'form', 'layer' ], function() {
+		var form = layui.form;
+		var layer = layui.layer;
+		;
+		var $ = layui.jquery;
+		//监听提交
+		form.on('submit(formDemo)', function(data) {
+			var channel = data.field.channel;
+			$.ajax({
+				url : "/contentSend",
+				type : "POST",
+				data : {
+					"str" : data.field.desc,
+					"title" : data.field.title,
+					"channel" : channel
+				},
+				dataType : "json",
+				success : function(json) {
+					layer.msg(json.msg, {
+						icon : 1,
+						offset : 'auto',
+						time : 2000
+					}, function() {
+						location.href = '/article?channel=' + channel;
+						// 获得frame索引
+						//parent.location.reload();
+						/* var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index); */
+					});
+				},
+				error : function() {
+					layer.msg("服务器出错！");
+				}
+			});
+			return false;
+		});
+	});
+</script>
+
+</html>
