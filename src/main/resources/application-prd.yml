@@ -36,6 +36,7 @@ spring:
 
 swagger:
   enabled: true
+  base-package: top.myideas.controller
 logging:
   level:
     ROOT: ERROR

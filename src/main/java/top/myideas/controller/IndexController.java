@@ -1,5 +1,7 @@
 package top.myideas.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Api(consumes = "个人主页管理",tags = "localhost/swagger-ui.html")
 public class IndexController {
 	private static Integer articleCount = 0;
 	/*private static List<SubMyContent> contents = null;*/
@@ -35,6 +38,7 @@ public class IndexController {
 	}
 
 	@RequestMapping({ "/", "/index" })
+	@ApiOperation (consumes="主页接口",notes = "index",value="/index")
 	private ModelAndView index() {
 		articleCount = myContentService.count ();
 		ModelAndView mav = new ModelAndView("index");

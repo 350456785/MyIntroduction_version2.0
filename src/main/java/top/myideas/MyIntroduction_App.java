@@ -9,10 +9,12 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @MapperScan({"top.myideas.mapper","top.myideas.Dao"})
 @PropertySource (value={"classpath:config.properties"},encoding = "utf-8")
+@EnableSwagger2
 public class MyIntroduction_App {
 	public static void main(String[] args) {
 		SpringApplication.run(MyIntroduction_App.class, args);
