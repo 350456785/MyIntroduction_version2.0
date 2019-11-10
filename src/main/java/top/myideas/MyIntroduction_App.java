@@ -8,11 +8,12 @@ import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @MapperScan({"top.myideas.mapper","top.myideas.Dao"})
+@PropertySource (value={"classpath:config.properties"},encoding = "utf-8")
 public class MyIntroduction_App {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MyIntroduction_App.class, args);
 	}
@@ -24,7 +25,7 @@ public class MyIntroduction_App {
 
 			@Override
 			public void customize(Connector connector) {
-				System.out.println("用于解决 RFC 3986的报错 ");
+				//用于解决 RFC 3986的报错
 				connector.setProperty("relaxedQueryChars", "|{}[]");
 			}
 			

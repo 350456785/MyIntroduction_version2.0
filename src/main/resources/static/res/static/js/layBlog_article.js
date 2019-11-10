@@ -1,66 +1,70 @@
-﻿
+﻿layui.define(['element', 'carousel', 'laypage', 'form', 'laytpl'], function (exports) {
+	var $ = layui.jquery
+		, laytpl = layui.laytpl
+		, element = layui.element
+		, carousel = layui.carousel
+		, laypage = layui.laypage
+		, form = layui.form;
+	var myCount;
+	var channel = $("li.channel.layui-this").val();
+	$.ajax({
+		type: 'post',
+		data: {channel: channel},
+		url: '/myCountPage',
+		async: false,
+		success: function (data) {
+			myCount = data.page;
+		}
+	});
+	laypage.render({
+		elem: 'myContent_page'
+		, count: myCount //数据总数
+		, limit: 5
+		, limits: [5, 10, 15, 20, 25]
+		, jump: function (obj) {
+			$.ajax(
+				{
+					url: '/pagination',
+					data: {curr: obj.curr, channel: channel},
+					dataType: 'json',
+					type: 'post',
+					success: function (data) {
+						var myContents = [];
+						$("#MyContents").empty();
+						layui.each(data, function (index, item) {
+							myContents.push('<div class=\"item\"> ' +
+								'<div class=\"item-content\">\n' +
+								'            <h3>\n' +
+								'              <em class=\"Subtitle\">' + item.title + '</em>\n' +
+								'            </h3>\n' +
+								'          <br/>\n' +
+								'            <p id=\"myContent.id\" style=\"display: none;\">' + item.id + '</p>\n' +
+								'            <pre>' + item.content + '</pre>\n' +
+								'      </div>\n' +
+								'      <div class=\"date-box\">\n' +
+								'          <div class=\"date\" style=\"color: white;\">\n' +
+								'              <span>' + item.time + '</span>\n' +
+								'               <span  class=\"layui-btn-group\">\n' +
+								'\t\t\t\t\t\t<button type=\"button\" onclick="del_btn(&quot;' + item.id + '&quot;)"\n' +
+								'                                class=\"layui-btn layui-btn-xs layui-btn-danger\">删除</button>\n' +
+								'</span>\n' +
+								'           </div>\n' +
+								'\n' +
+								'        </div>' +
+								'</div>');
+						});
+						myContents.join('');
+						$("#MyContents").append(myContents);
 
-layui.define(['element', 'carousel', 'laypage','form','laytpl'], function(exports){
-  var $ = layui.jquery
-  ,laytpl = layui.laytpl
-  ,element = layui.element
-  ,carousel = layui.carousel
-  ,laypage = layui.laypage
-  ,form = layui.form;
-  var myCount;
-  $.ajax({
-	  type: 'post',
-	  url: '/myCountPage',
-	  async: false,
-	  success:function(data){
-		  myCount=data.page;
-	  }
-  });
-  laypage.render({
-    elem: 'myContent_page'
-    ,count: myCount //数据总数
-    ,jump: function(obj){
-      //console.log(obj)
-    }
-  });
+					}
+				}
+			)
+
+		}
+	});
+	exports('layBlog_article', {});
 
 
-  //end 提交
-  /*$('#item-btn').on('click', function(){
-    var count = $('#LAY-msg-box li').length;
-    //console.log(count)
-    var data = new Date();
-    var f = data.getFullYear(),m = data.getMonth(),g =data.getDate();
-    time = f+'/'+m+'/'+g;
-    var elemCont = $('#LAY-msg-content')
-    ,content = elemCont.val();
-    if(content.replace(/\s/g, '') == ""){
-      layer.msg('请先输入留言');
-      return elemCont.focus();
-    }else{
-      
-      var view = $('#LAY-msg-tpl').html()
-        //模拟数据
-        ,data = {
-          name: '闲心'
-          ,time: time
-          ,avatar: '../res/static/img/avatar.jpg'
-          ,content: content
-      };
-
-        //模板渲染
-      laytpl(view).render(data, function(html){
-        $('#LAY-msg-box').prepend(html);
-          elemCont.val('');
-          layer.msg('留言成功', {
-              icon: 1
-        })
-      });
-      $('#count').text(myCount+1);
-    }
-  })*/
-  
-
-
-  exports('layBlog_article', {}); 
 });
+
+

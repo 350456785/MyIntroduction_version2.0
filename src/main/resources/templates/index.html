@@ -1,189 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
-<title>博客</title>
-<link rel="stylesheet" href="../res/layui/css/layui.css">
-<link rel="stylesheet" href="../res/static/css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>个人网址</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" href="res/layui/css/layui.css">
+    <link rel="stylesheet" href="res/static/css/index.css">
 </head>
 <body>
-	<!-- 侧边内容 -->
-	<div class="sidebar-content">
-		<div class="layui-card">
-			<div class="layui-card-header">
-				<img src="../res/static/img/portrait.png" alt="" style="width: 50%;"><br />
-				<span>黄刚</span>
-			</div>
-			<div class="layui-card-body">
-				<ul>
-					<li class="txt"><span>[[${articleCount}]]</span><br /> <span>笔记</span></li>
-					<li class="item"><span>0</span><br /> <span>项目</span></li>
-					<!-- <li class="visitors">
-                  <span>5008</span><br />
-                  <span>访问人数</span>
-                </li> -->
-				</ul>
-			</div>
-		</div>
-		<ul class="layui-nav">
-			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-			<li class="layui-nav-item"><a href="/article">笔记<br />ARTICLE
-			</a></li>
-			<!-- <li class="layui-nav-item"><a href="mood.html">微语<br/>MOOD</a></li> -->
-			<li class="layui-nav-item"><a href="works.html">作品<br />WORKS
-			</a></li>
-			<!-- <li class="layui-nav-item last  layui-this"><a href="about.html">关于<br/>ABOUT</a></li> -->
-		</ul>
-	</div>
+<!-- 侧边内容 -->
+<div class="sidebar-content">
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <img src="../res/static/img/portrait.png" alt="" style="width: 50%;"><br/>
+            <span>黄刚</span>
+        </div>
+        <div class="layui-card-body">
+            <ul>
+                <li class="txt"><span>[[${articleCount}]]</span><br/> <span>笔记</span></li>
+                <li class="item"><span>0</span><br/> <span>项目</span></li>
+                <!-- <li class="visitors">
+              <span>5008</span><br />
+              <span>访问人数</span>
+            </li> -->
+            </ul>
+        </div>
+    </div>
+    <ul class="layui-nav">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item"><a href="/article">笔记<br/>ARTICLE
+        </a></li>
+        <!-- <li class="layui-nav-item"><a href="mood.html">微语<br/>MOOD</a></li> -->
+        <li class="layui-nav-item"><a href="works.html">作品<br/>WORKS
+        </a></li>
+        <!-- <li class="layui-nav-item last  layui-this"><a href="about.html">关于<br/>ABOUT</a></li> -->
+    </ul>
+</div>
 
 
+<!-- 主要内容 -->
+<div class="main about">
+    <div class="item">
+        <h4 class="personal">个人简介</h4>
+        <p class="Introduction">
+            黄刚<br/>性别：男/ 出生年月日：1986.12.01<br/>
+        <div class="layui-container">
+            <div class="layui-row">
+                <div class="layui-col-xs12 layui-col-sm10 layui-col-md8"
+                     style="color: white; text-align: left;">
+                    <div>全日制学历：武汉铁路职业技术学院 专科 专业：数控(C语言编程)</div>
+                    <div>函授学历：兰州交大 本科 专业：车辆工程</div>
+                    <div>计算机相关证书：C语言、软件设计师</div>
+                    <br> <em>
+                    经历：2008年7月分配到昆明铁路局昆明北车辆段工作，2008年至2009年在威舍车间任检车员。2010年至今，于轮轴车间客轮组工作。因自身兴趣爱好和追求，利用下班业余时间学习软件开发（java编程语言），通过自学现已基本掌握了eclipse、mySQL、spring
+                    mvc、mybatis、java、ajax、jQuery等基本用法，能写一些简单的项目。主要有：员工管理系统、考勤管理系统、网上商城等。
+                </em>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h4 class="personal">自我技能评价</h4>
+        <em style="color: white">HTML</em>
+        <div class="layui-progress layui-progress-big" lay-showpercent="true">
+            <div class="layui-progress-bar layui-bg-red" lay-percent="60%"></div>
+        </div>
+        <em style="color: white">SpringBoot2.0</em>
+        <div class="layui-progress layui-progress-big" lay-showpercent="true">
+            <div class="layui-progress-bar layui-bg-orange" lay-percent="80%"></div>
+        </div>
+        <em style="color: white">SpringCloudEureka</em>
+        <div class="layui-progress layui-progress-big" lay-showpercent="true">
+            <div class="layui-progress-bar layui-bg-cyan" lay-percent="70%"></div>
+        </div>
+        <em style="color: white">JAVA</em>
+        <div class="layui-progress layui-progress-big" lay-showpercent="true">
+            <div class="layui-progress-bar layui-bg-blue" lay-percent="80%"></div>
+        </div>
+        <em  style="color:white">MySQL</em>
+            <div class="layui-progress layui-progress-big" lay-showpercent="true">
+                <div class="layui-progress-bar layui-bg-green" lay-percent="70%"></div>
+            </div>
+            <em  style="color:white">RabbitMQ</em>
+                <div class="layui-progress layui-progress-big" lay-showpercent="true">
+                    <div class="layui-progress-bar" lay-percent="70%"></div>
+                </div>
+                <br>
+                <h2>学习历程</h2>
+                <br>
+                <ul class="layui-timeline">
+                    <li class="layui-timeline-item"><i
+                            class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text"
+                             style="color: #7CFC00;">
+                            <h3 class="layui-timeline-title" style="color: #7c92e4;">
+                                时间：2017年4月~2017年7月<span>云笔记</span>
+                            </h3>
+                            <p>主要功能：记录个人资料信息，可共享指定信息</p>
+                            <p>主要技术</p>
+                            <p>前端：HTML5 CSS JQuery</p>
+                            <p>后台：JAVA spring springMVC myBatis</p>
+                            <p>数据库：mysql</p>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item"><i
+                            class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text"
+                             style="color: #7CFC00;">
+                            <h3 class="layui-timeline-title" style="color: #7c92e4;">
+                                时间：2017年9月~2017年11月<span>员工管理系统</span>
+                            </h3>
+                            <p>主要功能：记录员工个人资料信息，可进行增、删、改、查</p>
+                            <p>主要技术</p>
+                            <p>前端：HTML5 CSS3 JQuery</p>
+                            <p>后台：JAVA spring springMVC myBatis</p>
+                            <p>数据库：mysql</p>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item"><i
+                            class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text"
+                             style="color: #7CFC00;">
+                            <h3 class="layui-timeline-title" style="color: #7c92e4;">
+                                时间：2017年12月~2018年2月<span>考勤管理系统</span>
+                            </h3>
+                            <p>主要功能：记录员工个人资料信息，可进行增、删、改、查</p>
+                            <p>主要技术</p>
+                            <p>前端：HTML5 CSS3 JQuery Bootstrap easyUI</p>
+                            <p>后台：JAVA spring springMVC myBatis</p>
+                            <p>数据库：mysql</p>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item"><i
+                            class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text"
+                             style="color: #7CFC00;">
+                            <h3 class="layui-timeline-title" style="color: #7c92e4;">
+                                时间：2018年后<span>网上商城</span>
+                            </h3>
+                            <p>主要功能：注册激活，添加商品、购买记录等</p>
+                            <p>主要技术</p>
+                            <p>前端：HTML5 CSS3 JQuery Bootstrap easyUI</p>
+                            <p>后台：JAVA SpringBoot2.0.0</p>
+                            <p>数据库：mysql redis</p>
+                        </div>
+                    </li>
+                </ul>
 
-	<!-- 主要内容 -->
-	<div class="main about">
-		<div class="item">
-			<h4 class="personal">个人简介</h4>
-			<p class="Introduction">
-				黄刚<br />性别：男/ 出生年月日：1986.12.01<br />
-			<div class="layui-container">
-				<div class="layui-row">
-					<div class="layui-col-xs12 layui-col-sm10 layui-col-md8"
-						style="color: white; text-align: left;">
-						<div>全日制学历：武汉铁路职业技术学院 专科 专业：数控(C语言编程)</div>
-						<div>函授学历：兰州交大 本科 专业：车辆工程</div>
-						<div>计算机相关证书：C语言、软件设计师</div>
-						<br> <em>
-							经历：2008年7月分配到昆明铁路局昆明北车辆段工作，2008年至2009年在威舍车间任检车员。2010年至今，于轮轴车间客轮组工作。因自身兴趣爱好和追求，利用下班业余时间学习软件开发（java编程语言），通过自学现已基本掌握了eclipse、mySQL、spring
-							mvc、mybatis、java、ajax、jQuery等基本用法，能写一些简单的项目。主要有：员工管理系统、考勤管理系统、网上商城等。
-						</em>
-					</div>
-				</div>
-			</div>
-			<br>
-			<h4 class="personal">自我技能评价</h4>
-			<em style="color: white">HTML</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar layui-bg-red" lay-percent="60%"></div>
-			</div>
-			<em style="color: white">SpringBoot2.0</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar layui-bg-orange" lay-percent="80%"></div>
-			</div>
-			<em style="color: white">SpringCloudEureka</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar layui-bg-cyan" lay-percent="70%"></div>
-			</div>
-			<em style="color: white">JAVA</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar layui-bg-blue" lay-percent="80%"></div>
-			</div>
-			<emstyle style="color:white">MySQL</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar layui-bg-green" lay-percent="70%"></div>
-			</div>
-			<emstyle style="color:white">RabbitMQ</em>
-			<div class="layui-progress layui-progress-big" lay-showpercent="true">
-				<div class="layui-progress-bar" lay-percent="70%"></div>
-			</div>
-			<br>
-			<h2>学习历程</h2>
-			<br>
-			<ul class="layui-timeline">
-				<li class="layui-timeline-item"><i
-					class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text"
-						style="color: #7CFC00;">
-						<h3 class="layui-timeline-title">
-							时间：2017年4月~2017年7月<span>云笔记</span>
-						</h3>
-						<p>主要功能：记录个人资料信息，可共享指定信息</p>
-						<p>主要技术</p>
-						<p>前端：HTML5 CSS JQuery</p>
-						<p>后台：JAVA spring springMVC myBatis</p>
-						<p>数据库：mysql</p>
-					</div></li>
-				<li class="layui-timeline-item"><i
-					class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text"
-						style="color: #7CFC00;">
-						<h3 class="layui-timeline-title">
-							时间：2017年9月~2017年11月<span>员工管理系统</span>
-						</h3>
-						<p>主要功能：记录员工个人资料信息，可进行增、删、改、查</p>
-						<p>主要技术</p>
-						<p>前端：HTML5 CSS3 JQuery</p>
-						<p>后台：JAVA spring springMVC myBatis</p>
-						<p>数据库：mysql</p>
-					</div></li>
-				<li class="layui-timeline-item"><i
-					class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text"
-						style="color: #7CFC00;">
-						<h3 class="layui-timeline-title">
-							时间：2017年12月~2018年2月<span>考勤管理系统</span>
-						</h3>
-						<p>主要功能：记录员工个人资料信息，可进行增、删、改、查</p>
-						<p>主要技术</p>
-						<p>前端：HTML5 CSS3 JQuery Bootstrap easyUI</p>
-						<p>后台：JAVA spring springMVC myBatis</p>
-						<p>数据库：mysql</p>
-					</div></li>
-				<li class="layui-timeline-item"><i
-					class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text"
-						style="color: #7CFC00;">
-						<h3 class="layui-timeline-title">
-							时间：2018年后<span>网上商城</span>
-						</h3>
-						<p>主要功能：注册激活，添加商品、购买记录等</p>
-						<p>主要技术</p>
-						<p>前端：HTML5 CSS3 JQuery Bootstrap easyUI</p>
-						<p>后台：JAVA SpringBoot2.0.0</p>
-						<p>数据库：mysql redis</p>
-					</div></li>
-			</ul>
+                <h4 class="contact">与我联系</h4>
+                <img class="code" src="../res/static/img/code.png" alt=""
+                     style="width: 20%;">
+                <p class="qq-number">
+                    扫码加微信<br/>QQ:350456785
+                </p>
+    </div>
+</div>
+<hr class="layui-bg-orange">
+<div class="layui-footer footer footer-index">
+    <div class="layui-main" style="text-align: center;color:white;">
+        <p>© 2019 version2.0</p>
+        <p>滇ICP备18002082号-1</p>
+    </div>
+</div>
 
-			<h4 class="contact">与我联系</h4>
-			<img class="code" src="../res/static/img/code.png" alt=""
-				style="width: 20%;">
-			<p class="qq-number">
-				扫码加微信<br />QQ:350456785
-			</p>
-		</div>
-	</div>
-	<hr class="layui-bg-orange">
-	<div class="layui-footer footer footer-index">
-		<div class="layui-main" style="text-align: center;color:white;" >
-				<p>© 2019 version2.0</p>
-				<p>滇ICP备18002082号-1</p>
-		</div>
-	</div>
+<!-- 搜索框 -->
 
-	<!-- 搜索框 -->
-	<div class="seach">
-		<form class="layui-form seach-box" action="">
-			<div class="layui-form-item">
-				<div class="layui-input-block">
-					<button class="layui-btn">
-						<i class="layui-icon layui-icon-search"></i>
-					</button>
-					<input type="text" name="username" lay-verify="required"
-						placeholder="搜索相关" autocomplete="off" class="layui-input">
-				</div>
-			</div>
-		</form>
-	</div>
 
-	<script src="../res/layui/layui.js"></script>
-	<!--[if lt IE 9]>
-  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<script src="res/layui/layui.js"></script>
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-	<script>
-		 layui.config({
-			base : '../res/static/js/'
-		}).use('layBlog');
-	</script>
+<script>
+	layui.config({
+		base: '../res/static/js/'
+	}).use('layBlog');
+</script>
 </body>
 </html>
