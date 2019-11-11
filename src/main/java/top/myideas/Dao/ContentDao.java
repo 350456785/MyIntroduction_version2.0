@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface ContentDao {
     @Select("select*from my_content where channel=#{channel} order by time desc limit 5")
-   List<SubMyContent> findAll(Integer channel);
+    List<SubMyContent> findAll(Integer channel);
     @Select("select*from my_content where channel=#{channel} order by time desc limit ${page},5")
-   List<SubMyContent> findPagination(Integer page,Integer channel);
+    List<SubMyContent> findPagination(Integer page,Integer channel);
     @Select("select count(*) from my_content")
-   Integer count();
+    Integer count();
     @Select("select count(*) from my_content where channel=#{channel} ")
-   Integer channelCount(Integer channel);
+    Integer channelCount(Integer channel);
     
     @Delete("delete from my_content where id=#{contentId}")
     Integer delContent(String contentId);

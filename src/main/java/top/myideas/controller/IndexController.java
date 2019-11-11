@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@Api(consumes = "个人主页管理",tags = "localhost/swagger-ui.html")
+@Api(tags = "swagger管理:localhost/swagger-ui.html")
 public class IndexController {
 	private static Integer articleCount = 0;
 	/*private static List<SubMyContent> contents = null;*/
@@ -38,7 +38,7 @@ public class IndexController {
 	}
 
 	@RequestMapping({ "/", "/index" })
-	@ApiOperation (consumes="主页接口",notes = "index",value="/index")
+	@ApiOperation (value="主页接口")
 	private ModelAndView index() {
 		articleCount = myContentService.count ();
 		ModelAndView mav = new ModelAndView("index");
@@ -99,7 +99,7 @@ public class IndexController {
 	
 	@RequestMapping("/pagination")
 	@ResponseBody
-	private List Pagination(Integer curr,Integer channel){
+	private List Pagination(Integer curr, Integer channel){
 		curr=curr==null?0:curr;
 		channel=channel==null?1:channel;
 		return myContentService.selectPagination (curr, channel);
