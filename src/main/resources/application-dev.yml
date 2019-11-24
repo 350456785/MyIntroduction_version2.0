@@ -49,7 +49,7 @@ logging:
   file: /root/myintroduction.log
 
 app:
-  images: "/root/photo/"
+  images: D:\\eclipse-workspace\\myIntroduction\\src\\main\\resources\\static\\upload\\
 
 
 pagehelper:

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +14,6 @@ import top.myideas.service.MyContentService;
 import top.myideas.utils.AppConfig;
 import top.myideas.utils.Result;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class IndexController {
 	private static Integer articleCount = 0;
 	/*private static List<SubMyContent> contents = null;*/
 	private static final Integer CHANNEL_INDEX = 1;
-	@Resource
+	@Autowired
 	private AppConfig appConfig;
 	
 	@Autowired
@@ -104,5 +104,12 @@ public class IndexController {
 		channel=channel==null?1:channel;
 		return myContentService.selectPagination (curr, channel);
 		
+	}
+	@GetMapping("/photo")
+	public ModelAndView photo(){
+		ModelAndView mav=new ModelAndView ("photo");
+		mav.addObject ("articleCount", articleCount);
+		mav.addObject ("project", 0);
+		return mav;
 	}
 }

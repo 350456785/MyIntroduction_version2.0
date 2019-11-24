@@ -12,6 +12,7 @@ import java.util.TreeMap;
 @Component
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
+	private String images;
 	
 	private TreeMap<Integer, String> channels;
 	
@@ -30,5 +31,11 @@ public class AppConfig {
 				'}';
 	}
 	
+	public String getImages () {
+		return images;
+	}
 	
+	public void setImages (String images) {
+		this.images = images;
+	}
 }

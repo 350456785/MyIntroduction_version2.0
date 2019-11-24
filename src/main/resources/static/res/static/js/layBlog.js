@@ -7,7 +7,7 @@ layui.define(['element', 'carousel', 'laypage','form','laytpl'], function(export
   ,carousel = layui.carousel
   ,laypage = layui.laypage
   ,form = layui.form;
-  
+
 
 
   exports('layBlog', {}); 
