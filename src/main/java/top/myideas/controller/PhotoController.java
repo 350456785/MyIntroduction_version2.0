@@ -53,7 +53,7 @@ public class PhotoController {
 					while ((length = fis.read (b)) != -1) fos.write (b, 0, length);
 					Image image = new Image ();
 					image.setImageId (UUID.randomUUID ().toString ().replace ("-", ""));
-					image.setImageUrl (imagePath);
+					image.setImageUrl (appConfig.getImageUrl ()+imageName);
 					flag = myImageService.saveImage (image);
 					if (!flag) {
 						result.setCode (1);

@@ -50,7 +50,7 @@ logging:
 
 app:
   images: "/root/photo/"
-
+  imageUrl: "/root/"
 
 pagehelper:
   helper-dialect: mysql

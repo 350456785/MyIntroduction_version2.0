@@ -13,8 +13,16 @@ import java.util.TreeMap;
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 	private String images;
-	
+	private String imageUrl;
 	private TreeMap<Integer, String> channels;
+	
+	public String getImageUrl () {
+		return imageUrl;
+	}
+	
+	public void setImageUrl (String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	
 	public TreeMap<Integer, String> getChannels () {
 		return channels;
