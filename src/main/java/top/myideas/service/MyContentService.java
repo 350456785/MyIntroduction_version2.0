@@ -8,12 +8,22 @@ import java.util.List;
 
 @Service
 public interface MyContentService {
-     int insert(MyContent content);
-     int Delete(String id);
-     List<SubMyContent> selectAll(Integer channel);
-     List<SubMyContent> selectPagination(Integer page,Integer channel);
-     Integer count();
-     Integer  channelCount(Integer channel);
-     List<MyContent> findContent(String title);
-     
+    int insert(MyContent content);
+
+    int Delete(String id);
+
+    List<SubMyContent> selectAll(Integer channel);
+
+    List<SubMyContent> selectPagination(Integer page, Integer channel);
+
+    Integer count();
+
+    Integer channelCount(Integer channel);
+
+    List<MyContent> findContent(String title);
+
+    MyContent selectContent(String contentId);
+
+    Boolean updateArticle(MyContent myContent);
+
 }

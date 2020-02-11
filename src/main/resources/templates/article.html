@@ -33,9 +33,9 @@
         </a></li>
         <li class="layui-nav-item"><a href="works.html">作品<br/>WORKS
         </a></li>
-        <li class="layui-nav-item"><a href="photo.html">相冊<br/>WORKS
+        <li class="layui-nav-item"><a href="/photo">相冊<br/>WORKS
         </a></li>
-        <li class="layui-nav-item last"><a href="index">首页<br/>INDEX
+        <li class="layui-nav-item last"><a href="/index">首页<br/>INDEX
         </a></li>
 
     </ul>
@@ -92,30 +92,30 @@
 
 <![endif]-->
 <script>
-	layui.config({
-		base: '../res/static/js/'
-	}).use('layBlog_article');
+    layui.config({
+        base: '../res/static/js/'
+    }).use('layBlog_article');
 
-	layui.use(["layer", "element", "table"], function () {
-		$ = layui.$;
-		var table = layui.table;
-		var layer = layui.layer;
+    layui.use(["layer", "element", "table"], function () {
+        $ = layui.$;
+        var table = layui.table;
+        var layer = layui.layer;
 
-		$(".channel").click(function () {
-			var value = this.value;
-			location.href = '/article?channel=' + value;
+        $(".channel").click(function () {
+            var value = this.value;
+            location.href = '/article?channel=' + value;
 
-		});
+        });
 
-		$("#btnSend").click(function () {
-			layer.open({
-				type: 1,
-				title: '专业技术记录',
-				content: $('#content_form')
-			});
-		});
+        $("#btnSend").click(function () {
+            layer.open({
+                type: 1,
+                title: '专业技术记录',
+                content: $('#content_form')
+            });
+        });
 
-	});
+    });
 </script>
 
 
@@ -153,167 +153,190 @@
 </form>
 
 <script>
-	var channel, contentId;
+    var channel, contentId;
+    var flag =true;  /*判断是提交还是修改*/
+    function update_btn(content_Id) {
+        flag=false;
+        contentId=content_Id;
+        layui.use(['form']);
+        $.post('/selectArticle', {contentId: content_Id}, function (result) {
+            $('#content_form input[name="title"]').val(result.title);
+            $('#content_form input[value=\"'+result.channel+'\"]').prop("checked", true);
+            $('#content_form textarea').text(result.content);
+            layui.form.render();
+            layer.open({
+                type: 1,
+                title: '专业技术记录',
+                content: $('#content_form')
+            });
+        });
 
-	function del_btn(content_Id) {
-		channel = $("li.channel.layui-this").val();
-		contentId = content_Id;
-		var action = layer.open({
-			type: 1,
-			offset: 'auto'
-			//,id: 'password'//防止重复弹出
-			,
-			content: $('#password'),
-			btn: '确认删除',
-			btnAlign: 'c' //按钮居中
-			,
-			shade: 0.5 //不显示遮罩
-			,
 
-			anim: 6,
-			resize: true,
-			yes: function (index, layero) {
-				sure();
-				// layer.closeAll();
-			}
-		});
-	}
 
-	function sure() {
-		var password = $("#password input").val();
-		$.ajax({
-			url: "/delContent",
-			data: {
-				'contentId': contentId,
-				'channel': channel,
-				'password': password
-			},
-			dataType: 'json',
-			type: 'POST',
-			success: function (json) {
-				var message = json.msg;
-				if (!json.data) {
-					layer.msg(message, {
-						icon: 1,
-						offset: '200px',
-						time: 2000
-					}, function () {
-						layer.closeAll();
-					});
-				} else {
-					layer.msg(message, {
-						icon: 1,
-						offset: '200px',
-						time: 2000
-					}, function () {
-						location.href = '/article?channel=' + channel;
-					});
+    }
 
-				}
+    function del_btn(content_Id) {
+        channel = $("li.channel.layui-this").val();
+        contentId = content_Id;
+        var action = layer.open({
+            type: 1,
+            offset: 'auto'
+            //,id: 'password'//防止重复弹出
+            ,
+            content: $('#password'),
+            btn: '确认删除',
+            btnAlign: 'c' //按钮居中
+            ,
+            shade: 0.5 //不显示遮罩
+            ,
 
-			},
-		});
-	}
+            anim: 6,
+            resize: true,
+            yes: function (index, layero) {
+                sure();
+                // layer.closeAll();
+            }
+        });
+    }
 
-	layui.use(['form', 'layer','laypage'], function () {
-		var form = layui.form;
-		var layer = layui.layer;
-		var laypage = layui.laypage;
-		var $ = layui.jquery;
-		//监听提交
-		/*搜索内容*/
-		form.on('submit(mySearch)', function (data) {
-			var text = data.field.text;
-			$.ajax({
-				url: '/mySearch',
-				type: 'post',
-				dataType: 'json',
-				data: {text:text},
-				/*async: false,*/
-				success: function (searchContent) {
-					if ($.isEmptyObject(searchContent)) {
-						layer.msg('没有找到相关的内容！',{icon: 5});
-					} else{
-						laypage.render({
-							elem: 'myContent_page'
-							, count: searchContent.length //数据总数
-							, limit: 5
-							, limits: [5, 10, 15, 20, 25]
-							, jump: function (obj) {
-								var myContents = [];
-								thisSearchContent = searchContent.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
-								$(".layui-tab-title>.channel").removeClass('layui-this');
-								$("#MyContents").empty();
-								layui.each(thisSearchContent, function (index, item) {
-									myContents.push('<div class=\"item\"> ' +
-										'<div class=\"item-content\">\n' +
-										'            <h3>\n' +
-										'              <em class=\"Subtitle\">' + item.title + '</em>\n' +
-										'            </h3>\n' +
-										'          <br/>\n' +
-										'            <p id=\"myContent.id\" style=\"display: none;\">' + item.id + '</p>\n' +
-										'            <pre>' + item.content + '</pre>\n' +
-										'      </div>\n' +
-										'      <div class=\"date-box\">\n' +
-										'          <div class=\"date\" style=\"color: white;\">\n' +
-										'              <span>' + item.time + '</span>\n' +
-										'               <span  class=\"layui-btn-group\">\n' +
-										'\t\t\t\t\t\t<button type=\"button\" onclick="del_btn(&quot;' + item.id + '&quot;)"\n' +
-										'                                class=\"layui-btn layui-btn-xs layui-btn-danger\">删除</button>\n' +
-										'</span>\n' +
-										'           </div>\n' +
-										'\n' +
-										'        </div>' +
-										'</div>');
-								});
-								myContents.join('');
-								$("#MyContents").append(myContents);
-							}
-						});
-				}
-					return false;
-				},
-				error: function () {
-					layer.msg("服务器异常！",{icon: 2});
-					return false;
-				}
-			});
-			return false;
-		});
+    function sure() {
+        var password = $("#password input").val();
+        $.ajax({
+            url: "/delContent",
+            data: {
+                'contentId': contentId,
+                'channel': channel,
+                'password': password
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function (json) {
+                var message = json.msg;
+                if (!json.data) {
+                    layer.msg(message, {
+                        icon: 1,
+                        offset: '200px',
+                        time: 2000
+                    }, function () {
+                        layer.closeAll();
+                    });
+                } else {
+                    layer.msg(message, {
+                        icon: 1,
+                        offset: '200px',
+                        time: 2000
+                    }, function () {
+                        location.href = '/article?channel=' + channel;
+                    });
 
-		form.on('submit(formDemo)', function (data) {
+                }
 
-			var channel = data.field.channel;
-			$.ajax({
-				url: "/contentSend",
-				type: "POST",
-				data: {
-					"str": data.field.desc,
-					"title": data.field.title,
-					"channel": channel
-				},
-				dataType: "json",
-				success: function (json) {
-					layer.msg(json.msg, {
-						icon: 1,
-						offset: 'auto',
-						time: 2000
-					}, function () {
-						location.href = '/article?channel=' + channel;
-						return false;
-						// 获得frame索引
-						//parent.location.reload();
-						/* var index = parent.layer.getFrameIndex(window.name);
-						parent.layer.close(index); */
-					});
-				},
-				error: function () {
-					layer.msg("服务器出错！");
-				}
-			});
-			return false;
-		});
-	});
+            },
+        });
+    }
+
+    layui.use(['form', 'layer', 'laypage'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var laypage = layui.laypage;
+        var $ = layui.jquery;
+        //监听提交
+        /*搜索内容*/
+        form.on('submit(mySearch)', function (data) {
+            var text = data.field.text;
+            $.ajax({
+                url: '/mySearch',
+                type: 'post',
+                dataType: 'json',
+                data: {text: text},
+                /*async: false,*/
+                success: function (searchContent) {
+                    if ($.isEmptyObject(searchContent)) {
+                        layer.msg('没有找到相关的内容！', {icon: 5});
+                    } else {
+                        laypage.render({
+                            elem: 'myContent_page'
+                            , count: searchContent.length //数据总数
+                            , limit: 5
+                            , limits: [5, 10, 15, 20, 25]
+                            , jump: function (obj) {
+                                var myContents = [];
+                                thisSearchContent = searchContent.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                $(".layui-tab-title>.channel").removeClass('layui-this');
+                                $("#MyContents").empty();
+                                layui.each(thisSearchContent, function (index, item) {
+                                    myContents.push('<div class=\"item\"> ' +
+                                        '<div class=\"item-content\">\n' +
+                                        '            <h3>\n' +
+                                        '              <em class=\"Subtitle\">' + item.title + '</em>\n' +
+                                        '            </h3>\n' +
+                                        '          <br/>\n' +
+                                        '            <p id=\"myContent.id\" style=\"display: none;\">' + item.id + '</p>\n' +
+                                        '            <pre>' + item.content + '</pre>\n' +
+                                        '      </div>\n' +
+                                        '      <div class=\"date-box\">\n' +
+                                        '          <div class=\"date\" style=\"color: white;\">\n' +
+                                        '              <span>' + item.time + '</span>\n' +
+                                        '               <span  class=\"layui-btn-group\">\n' +
+                                        '\t\t\t\t\t\t<button type=\"button\" onclick="del_btn(&quot;' + item.id + '&quot;)"\n' +
+                                        '                                class=\"layui-btn layui-btn-xs layui-btn-danger\">删除</button>\n' +
+                                        '\t\t\t\t\t\t<button type=\"button\" onclick="update_btn(&quot;' + item.id + '&quot;)"\n' +
+                                        '                                class=\"layui-btn layui-btn-xs layui-btn-normal\">修改</button>\n' +
+                                        '</span>\n' +
+                                        '           </div>\n' +
+                                        '\n' +
+                                        '        </div>' +
+                                        '</div>');
+                                });
+                                myContents.join('');
+                                $("#MyContents").append(myContents);
+                            }
+                        });
+                    }
+                    return false;
+                },
+                error: function () {
+                    layer.msg("服务器异常！", {icon: 2});
+                    return false;
+                }
+            });
+            return false;
+        });
+
+        form.on('submit(formDemo)', function (data) {
+            var channel = data.field.channel;
+            $.ajax({
+                url: "/contentSend",
+                type: "POST",
+                data: {
+                    "str": data.field.desc,
+                    "title": data.field.title,
+                    "channel": channel,
+                    "flag": flag,
+                    "id": contentId
+                },
+                dataType: "json",
+                success: function (json) {
+                    layer.msg(json.msg, {
+                        icon: 1,
+                        offset: 'auto',
+                        time: 2000
+                    }, function () {
+                        location.href = '/article?channel=' + channel;
+                        return false;
+                        // 获得frame索引
+                        //parent.location.reload();
+                        /* var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); */
+                    });
+                },
+                error: function () {
+                    layer.msg("服务器出错！");
+                }
+            });
+            return false;
+        });
+    });
 </script>
 
 </html>

@@ -12,27 +12,27 @@ import org.springframework.context.annotation.PropertySource;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@MapperScan({"top.myideas.mapper","top.myideas.Dao"})
-@PropertySource (value={"classpath:config.properties"},encoding = "utf-8")
+@MapperScan({"top.myideas.mapper", "top.myideas.Dao"})
+@PropertySource(value = {"classpath:config.properties"}, encoding = "utf-8")
 @EnableSwagger2
 public class MyIntroduction_App {
-	public static void main(String[] args) {
-		SpringApplication.run(MyIntroduction_App.class, args);
-	}
-	
-	@Bean
-	public ConfigurableServletWebServerFactory webServerFactory() {
-		TomcatServletWebServerFactory factory=new TomcatServletWebServerFactory();
-		factory.addConnectorCustomizers( new TomcatConnectorCustomizer() {
+    public static void main(String[] args) {
+        SpringApplication.run(MyIntroduction_App.class, args);
+    }
 
-			@Override
-			public void customize(Connector connector) {
-				//用于解决 RFC 3986的报错
-				connector.setProperty("relaxedQueryChars", "|{}[]");
-			}
-			
-		});
-		return factory;
-	}
+    @Bean
+    public ConfigurableServletWebServerFactory webServerFactory() {
+        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+        factory.addConnectorCustomizers(new TomcatConnectorCustomizer() {
+
+            @Override
+            public void customize(Connector connector) {
+                //用于解决 RFC 3986的报错
+                connector.setProperty("relaxedQueryChars", "|{}[]");
+            }
+
+        });
+        return factory;
+    }
 
 }

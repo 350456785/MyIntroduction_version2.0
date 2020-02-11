@@ -14,21 +14,27 @@ import java.util.List;
  */
 @Service
 public class MyImageServiceImpl implements MyImageService {
-	@Autowired
-	private ImageDao imageDao;
-	@Override
-	public Boolean saveImage (Image image) {
-		int flag=imageDao.saveImae(image);
-		return flag>0?true:false;
-	}
-	
-	@Override
-	public Integer findAll () {
-		return imageDao.findAll();
-	}
-	
-	@Override
-	public List<Image> getList () {
-		return imageDao.getList();
-	}
+    @Autowired
+    private ImageDao imageDao;
+
+    @Override
+    public Boolean saveImage(Image image) {
+        int flag = imageDao.saveImae(image);
+        return flag > 0 ? true : false;
+    }
+
+    @Override
+    public Integer findAll() {
+        return imageDao.findAll();
+    }
+
+    @Override
+    public List<Image> getList() {
+        return imageDao.getList();
+    }
+
+    @Override
+    public boolean deleteById(String imageId) {
+        return imageDao.deleteById(imageId) > 0;
+    }
 }

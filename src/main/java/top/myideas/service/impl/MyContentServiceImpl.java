@@ -14,50 +14,62 @@ import java.util.List;
 
 @Service
 public class MyContentServiceImpl implements MyContentService {
-	@Autowired
-	private MyContentMapper myContentMapper;
-	@Autowired
-	private ContentDao contentDao;
-	
-	public List<MyContent> findContent (String text) {
-		return contentDao.findContent (text);
-	}
-	
-	@Override
-	public int insert (MyContent content) {
-		content.setTime (new Date ());
-		content.setId (GeneratorID.getID ());
-		return myContentMapper.insert (content);
-		
-	}
-	
-	@Override
-	public int Delete (String id) {
-		
-		return contentDao.delContent (id);
-	}
-	
-	@Override
-	public List<SubMyContent> selectAll (Integer channel) {
-		channel = channel == null ? 1 : channel;
-		List<SubMyContent> list = contentDao.findAll (channel);
-		list.stream ().forEach (c -> c.changeTime ());
-		return list;
-	}
-	
-	@Override
-	public Integer count () {
-		
-		return contentDao.count ();
-	}
-	
-	@Override
-	public List<SubMyContent> selectPagination (Integer page, Integer channel) {
-		return contentDao.findPagination ((page - 1) * 5, channel);
-	}
-	
-	@Override
-	public Integer channelCount (Integer channel) {
-		return contentDao.channelCount (channel);
-	}
+    @Autowired
+    private MyContentMapper myContentMapper;
+    @Autowired
+    private ContentDao contentDao;
+
+    public List<MyContent> findContent(String text) {
+        return contentDao.findContent(text);
+    }
+
+    @Override
+    public MyContent selectContent(String contentId) {
+       MyContent myContent= contentDao.selectContent(contentId);
+        return myContent;
+    }
+
+    @Override
+    public Boolean updateArticle(MyContent myContent) {
+      return  contentDao.updateArticle(myContent)>0?true:false;
+    }
+
+    @Override
+    public int insert(MyContent content) {
+        content.setTime(new Date());
+        content.setId(GeneratorID.getID());
+        return myContentMapper.insert(content);
+
+    }
+
+    @Override
+    public int Delete(String id) {
+
+        return contentDao.delContent(id);
+    }
+
+    @Override
+    public List<SubMyContent> selectAll(Integer channel) {
+        channel = channel == null ? 1 : channel;
+        List<SubMyContent> list = contentDao.findAll(channel);
+        list.stream().forEach(c -> c.changeTime());
+        return list;
+    }
+
+    @Override
+    public Integer count() {
+
+        return contentDao.count();
+    }
+
+    @Override
+    public List<SubMyContent> selectPagination(Integer page, Integer channel) {
+        return contentDao.findPagination((page - 1) * 5, channel);
+    }
+
+    @Override
+    public Integer channelCount(Integer channel) {
+        return contentDao.channelCount(channel);
+    }
+
 }

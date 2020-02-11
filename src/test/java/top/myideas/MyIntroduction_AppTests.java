@@ -11,9 +11,9 @@ import top.myideas.utils.GeneratorID;
 @SpringBootTest
 public class MyIntroduction_AppTests {
 
-	@Test
-	public void contextLoads() {
-		
-	}
+    @Test
+    public void contextLoads() {
+
+    }
 
 }

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<context id="mycontext" targetRuntime="MyBatis3">
-		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
-		</commentGenerator>
-		<jdbcConnection
-			driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://120.24.246.221:3306/myintroduction"
-			userId="root" password="369963">
-		</jdbcConnection>
-		<javaTypeResolver>
-			<property name="forceBigDecimals" value="false" />
-		</javaTypeResolver>
-		<javaModelGenerator targetPackage="top.myideas.entity"
-			targetProject="myIntroduction\src\main\java">
-			<property name="enableSubPackages" value="true"/>
-			</javaModelGenerator>
-			<sqlMapGenerator targetPackage="mapper" targetProject="myIntroduction\src\main\java">
-			<property name="enableSubPackages" value="true"/>
-			</sqlMapGenerator>
-			<javaClientGenerator targetPackage="top.myideas.mapper" type="XMLMAPPER" targetProject="myIntroduction\src\main\java">
-			<property name="enableSubPackages" value="true"/>
-			</javaClientGenerator>
-			
-			<table tableName="my_content" domainObjectName="MyContent"
-			enableSelectByExample="false" enableCountByExample="false"
-			enableDeleteByExample="false" enableUpdateByExample="false">
-			<columnOverride column="content" javaType="java.lang.String" 
-			jdbcType="VARCHAR"></columnOverride>
-			   
-			</table>
-	</context>
+    <context id="mycontext" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://120.24.246.221:3306/myintroduction"
+                userId="root" password="369963">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="top.myideas.entity"
+                            targetProject="myIntroduction\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapper" targetProject="myIntroduction\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="top.myideas.mapper" type="XMLMAPPER"
+                             targetProject="myIntroduction\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="my_content" domainObjectName="MyContent"
+               enableSelectByExample="false" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false">
+            <columnOverride column="content" javaType="java.lang.String"
+                            jdbcType="VARCHAR"></columnOverride>
+
+        </table>
+    </context>
 </generatorConfiguration>

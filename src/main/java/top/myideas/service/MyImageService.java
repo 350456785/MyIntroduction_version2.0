@@ -9,9 +9,11 @@ import java.util.List;
  * @data 2019/11/24 - 11:22
  */
 public interface MyImageService {
-	Boolean saveImage (Image image);
-	
-	Integer findAll ();
-	
-	List<Image> getList ();
+    Boolean saveImage(Image image);
+
+    Integer findAll();
+
+    List<Image> getList();
+
+    boolean deleteById(String imageId);
 }

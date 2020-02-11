@@ -11,7 +11,7 @@ server:
 
 mybatis:
   mapper-locations:
-  - classpath:/mybatis/mapper/*.xml
+    - classpath:/mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 spring:

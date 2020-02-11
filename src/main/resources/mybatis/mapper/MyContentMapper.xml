@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.myideas.mapper.MyContentMapper">
-  <resultMap id="BaseResultMap" type="top.myideas.entity.MyContent">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="channel" jdbcType="TINYINT" property="channel" />
-  </resultMap>
-  <insert id="insert" parameterType="top.myideas.entity.MyContent">
-    insert into my_content (id, content, time, 
-      title, channel)
-    values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{title,jdbcType=VARCHAR}, #{channel,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="top.myideas.entity.MyContent">
-    insert into my_content
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="channel != null">
-        channel,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="channel != null">
-        #{channel,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <delete id="delete" parameterType="java.lang.String">
-     delete from my_content where id=#{id,jdbcType=VARCHAR}
-  </delete>
+    <resultMap id="BaseResultMap" type="top.myideas.entity.MyContent">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="channel" jdbcType="TINYINT" property="channel"/>
+    </resultMap>
+    <insert id="insert" parameterType="top.myideas.entity.MyContent">
+        insert into my_content (id, content, time,
+        title, channel)
+        values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP},
+        #{title,jdbcType=VARCHAR}, #{channel,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="top.myideas.entity.MyContent">
+        insert into my_content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="channel != null">
+                channel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null">
+                #{channel,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="java.lang.String">
+        delete from my_content where id=#{id,jdbcType=VARCHAR}
+    </delete>
 </mapper>

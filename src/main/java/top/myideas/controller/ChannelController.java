@@ -13,11 +13,12 @@ import java.util.Map;
  */
 @RestController
 public class ChannelController {
-	@Resource
-	private AppConfig appConfig;
-	   @RequestMapping("/channels")
-	private Map<Integer,String> getChannels(){
-		  
-	   	return appConfig.getChannels ();
-	   }
+    @Resource
+    private AppConfig appConfig;
+
+    @RequestMapping("/channels")
+    private Map<Integer, String> getChannels() {
+
+        return appConfig.getChannels();
+    }
 }

@@ -23,8 +23,8 @@ body {
 }
 
 layui-tab .layui-tab-title .layui-tab-bar {
-     /* display: none;*/
- }
+    /* display: none;*/
+}
 
 
 /*������*/
@@ -766,7 +766,7 @@ layui-tab .layui-tab-title .layui-tab-bar {
     }
 
     .seach {
-       /* display: none;*/
+        /* display: none;*/
     }
 
     .article-right-content {
